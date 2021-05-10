@@ -1,0 +1,12 @@
+ANONYMOUS
+ - home
+ - registro
+ - login
+ - init (protegido) (Borra todo. Crea usuario admin, ccaa's y provincias)
+USER
+
+ADMIN
+ - CR Candidatura
+ - CR Eleccion
+ - CR PartidoPolitico
+ 
