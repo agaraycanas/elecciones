@@ -1,6 +1,10 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
-encoding//src/main/resources/templates/home/index.html=UTF-8
+encoding//src/main/resources/templates/_t/nav.html=UTF-8
+encoding//src/main/resources/templates/anon/home.html=UTF-8
+encoding//src/main/resources/templates/anon/init.html=UTF-8
+encoding//src/main/resources/templates/anon/login.html=UTF-8
+encoding//src/main/resources/templates/anon/registro.html=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8
