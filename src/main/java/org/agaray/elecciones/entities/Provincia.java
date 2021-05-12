@@ -38,11 +38,10 @@ public class Provincia {
 		this.candidaturas = new HashSet<>();
 	}
 
-	public Provincia(String nombre, int numEscanyos, ComunidadAutonoma comunidadAutonoma) {
+	public Provincia(String nombre) {
 		super();
 		this.nombre = nombre;
-		this.numEscanyos = numEscanyos;
-		this.comunidadAutonoma = comunidadAutonoma;
+		this.numEscanyos = 0;
 	}
 
 	// =================================================

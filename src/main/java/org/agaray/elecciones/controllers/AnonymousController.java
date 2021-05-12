@@ -1,12 +1,24 @@
 package org.agaray.elecciones.controllers;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
+import org.agaray.elecciones.entities.ComunidadAutonoma;
+import org.agaray.elecciones.entities.Provincia;
 import org.agaray.elecciones.entities.User;
 import org.agaray.elecciones.exception.DangerException;
 import org.agaray.elecciones.exception.InfoException;
 import org.agaray.elecciones.helper.H;
 import org.agaray.elecciones.helper.PRG;
+import org.agaray.elecciones.repositories.CandidaturaRepository;
+import org.agaray.elecciones.repositories.ComunidadAutonomaRepository;
+import org.agaray.elecciones.repositories.EleccionRepository;
+import org.agaray.elecciones.repositories.PartidoPoliticoRepository;
+import org.agaray.elecciones.repositories.ProvinciaRepository;
 import org.agaray.elecciones.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,13 +34,81 @@ public class AnonymousController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@GetMapping("/init")
-	public String initGet(ModelMap m) throws DangerException {
-		 User admin = new User("admin",new BCryptPasswordEncoder().encode("admin"),true);
-		 userRepository.deleteAll();
-		 userRepository.save(admin);
-		return "redirect:/";
+	@Autowired
+	private ProvinciaRepository provinciaRepository;
+
+	@Autowired
+	private ComunidadAutonomaRepository comunidadAutonomaRepository;
+	
+	@Autowired
+	private CandidaturaRepository candidaturaRepository;
+	
+	@Autowired
+	private EleccionRepository eleccionRepository;
+	
+	@Autowired
+	private PartidoPoliticoRepository partidoPoliticoRepository;
+
+	private void initProvinciasYCCAAs() {
+		Map<String, List<String>> bd = new HashMap<String,List<String>>();
+		
+		bd.put("Andalucía", Arrays.asList("Almería","Cádiz","Córdoba","Granada","Huelva","Jaén","Málaga","Sevilla"));
+		bd.put("Aragón", Arrays.asList("Huesca","Teruel","Zaragoza"));
+		bd.put("Asturias (Principado de)", Arrays.asList("Asturias"));
+		bd.put("Canarias",Arrays.asList("Palmas (Las)","Santa Cruz de Tenerife"));
+		bd.put("Cantabria",Arrays.asList("Cantabria"));
+		bd.put("Castilla y León",Arrays.asList("Ávila","Burgos","León","Palencia","Salamanca","Segovia","Soria","Valladolid","Zamora"));
+		bd.put("Castilla-La Mancha",Arrays.asList("Albacete","Ciudad Real","Cuenca","Guadalajara","Toledo"));
+		bd.put("Cataluña",Arrays.asList("Barcelona","Gerona","Lérida","Tarragona"));
+		bd.put("Ceuta (Ciudad de)",Arrays.asList("Ceuta"));
+		bd.put("Comunidad Valenciana",Arrays.asList("Alicante","Castellón","Valencia"));
+		bd.put("Extremadura",Arrays.asList("Badajoz",
+                "Cáceres"));
+		bd.put("Galicia",Arrays.asList("Coruña (La)","Lugo","Orense","Pontevedra"));
+		bd.put("Islas Baleares",Arrays.asList("Islas Baleares"));
+		bd.put("Madrid (Comunidad de)",Arrays.asList("Madrid"));
+		bd.put("Melilla (Ciudad de)",Arrays.asList("Melilla"));
+		bd.put("Murcia (Región de)",Arrays.asList("Murcia"));
+		bd.put("Navarra (Comunidad Foral de)",Arrays.asList("Navarra"));
+		bd.put("País Vasco",Arrays.asList("Álava","Guipúzcoa","Vizcaya"));
+		bd.put("Rioja (La)",Arrays.asList("Rioja (La)"));
+
+		provinciaRepository.deleteAll();
+		comunidadAutonomaRepository.deleteAll();
+
+		for (String nombreCCAA: bd.keySet()) {
+			ComunidadAutonoma nuevaCCAA = new ComunidadAutonoma(nombreCCAA);
+			comunidadAutonomaRepository.save(nuevaCCAA);
+			
+			for (String nombreProvincia : bd.get(nombreCCAA)) {
+				Provincia nuevaProvincia = new Provincia(nombreProvincia);
+				nuevaProvincia.setComunidadAutonoma(nuevaCCAA);
+				nuevaCCAA.getProvincias().add(nuevaProvincia);
+				provinciaRepository.save(nuevaProvincia);
+			}
+		}
+
 	}
+
+	@GetMapping("/init")
+	public void initGet(ModelMap m) throws DangerException, InfoException {
+		 
+		 userRepository.deleteAll();
+		 provinciaRepository.deleteAll();
+		 comunidadAutonomaRepository.deleteAll();
+		 candidaturaRepository.deleteAll();
+		 partidoPoliticoRepository.deleteAll();
+		 eleccionRepository.deleteAll();
+		 
+		 
+		 User admin = new User("admin",new BCryptPasswordEncoder().encode("admin"),true);
+		 userRepository.save(admin);
+		 
+		 this.initProvinciasYCCAAs();
+		 
+		 PRG.info("Base de datos reinicializada");
+	}
+
 
 	@GetMapping("/info")
 	public String info(HttpSession s, ModelMap m) {
@@ -51,8 +131,13 @@ public class AnonymousController {
 	}
 
 	@GetMapping("/")
-	public String home(ModelMap m) {
-		m.put("view", "/anon/home");
+	public String home(
+			ModelMap m,
+			HttpSession s
+			) {
+		User user = s.getAttribute("user")!=null ? (User)s.getAttribute("user") : null;
+		String rol =  (user!=null ? (user.isAdmin() ? "admin" : "auth" ) : "anon" );
+		m.put("view", "/"+rol+"/home");
 		return "/_t/frame";
 	}
 
