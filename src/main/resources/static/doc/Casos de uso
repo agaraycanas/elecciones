@@ -1,13 +1,13 @@
 ANONYMOUS
- - home
- - registro
- - login
- - init (protegido) (Borra todo. Crea usuario admin, ccaa's y provincias)
- - R Eleccion
+ *- home
+ *- registro
+ *- login
+ *- init (protegido) (Borra todo. Crea usuario admin, ccaa's y provincias)
+ 
 USER
 	
 ADMIN
- - C Eleccion
- - CR Candidatura
- - CR PartidoPolitico
+ *- CR Eleccion (investigar formatos de fecha)
+ *- CR PartidoPolitico
+  - CR Candidatura
  

@@ -1,0 +1,26 @@
+<div class="container">
+	<h1>Nueva candidatura</h1>
+	
+	<form method="post">
+		
+		ELECCIONES
+		<select name="idEleccion">
+			<option th:each=" e : ${elecciones}" th:value="${e.id}" th:text="${e.fecha}"/>
+		</select>
+		<br/>
+			
+		PROVICIA
+		<select name="idProvincia">
+			<option th:each=" p : ${provincias}" th:value="${p.id}" th:text="|${p.nombre} (${p.comunidadAutonoma.nombre})|"/>
+		</select>
+		<br/>
+			
+		PARTIDO POLÍTICO
+		<select name="idPartidoPolitico">
+			<option th:each=" pp : ${pps}" th:value="${pp.id}" th:text="|${pp.siglas} (${pp.nombre})|"/>
+		</select>
+		<br/>
+			
+		<input type="submit"/>
+	</form>
+</div>

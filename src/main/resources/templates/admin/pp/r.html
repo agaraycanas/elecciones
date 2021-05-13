@@ -1,0 +1,9 @@
+<div class="container">
+	<button><a href="/admin/pp/c">Crear</a></button>
+	
+	<h1>Lista de partidos</h1>
+	
+	<ul>
+		<li th:each="p : ${partidos}" th:text="|${p.siglas} -  ${p.nombre}|"/>
+	</ul>
+</div>

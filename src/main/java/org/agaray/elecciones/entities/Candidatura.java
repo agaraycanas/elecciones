@@ -33,12 +33,11 @@ public class Candidatura {
 	// =================================================
 
 	public Candidatura() {
-		
 	}
 
-	public Candidatura(int numVotos, Eleccion eleccion, Provincia provincia, PartidoPolitico partidoPolitico) {
+	public Candidatura( Eleccion eleccion, Provincia provincia, PartidoPolitico partidoPolitico) {
 		super();
-		this.numVotos = numVotos;
+		this.numVotos = 0;
 		this.eleccion = eleccion;
 		this.provincia = provincia;
 		this.partidoPolitico = partidoPolitico;
