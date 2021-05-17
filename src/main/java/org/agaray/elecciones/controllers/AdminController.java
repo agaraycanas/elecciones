@@ -41,7 +41,7 @@ public class AdminController {
 	// ======================================
 
 	@GetMapping("eleccion/c")
-	public String cEleccionGet(
+	public String eleccionCGet(
 			ModelMap m) {
 		m.put("view", "admin/eleccion/c");
 		return "/_t/frame";
@@ -49,7 +49,7 @@ public class AdminController {
 
 	
 	@PostMapping("eleccion/c")
-	public String cEleccionPost(
+	public String eleccionCPost(
 			@RequestParam("fecha")
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 			LocalDate fecha
@@ -59,7 +59,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("eleccion/r")
-	public String rEleccionGet(
+	public String eleccionRGet(
 			ModelMap m
 			) {
 		m.put("elecciones", eleccionRepository.findAll());
@@ -71,7 +71,7 @@ public class AdminController {
 	// PARTIDO POLÍTICO
 	// ======================================
 	@GetMapping("pp/c")
-	public String cPartidoPoliticoGet(
+	public String partidoPoliticoCGet(
 			ModelMap m) {
 		m.put("view", "admin/pp/c");
 		return "/_t/frame";
@@ -79,7 +79,7 @@ public class AdminController {
 
 	
 	@PostMapping("pp/c")
-	public String cPartidoPoliticoPost(
+	public String partidoPoliticoCPost(
 			@RequestParam("siglas") String siglas,
 			@RequestParam("nombre") String nombre
 			) {
@@ -88,7 +88,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("pp/r")
-	public String rPartidoPoliticoGet(
+	public String partidoPoliticoRGet(
 			ModelMap m
 			) {
 		m.put("partidos", partidoPoliticoRepository.findAll());
@@ -101,7 +101,7 @@ public class AdminController {
 	// CANDIDATURA
 	// ======================================
 	@GetMapping("candidatura/c")
-	public String cCandidaturaGet(
+	public String candidaturaCGet(
 			ModelMap m) {
 		m.put("elecciones",eleccionRepository.findAll());
 		m.put("pps",partidoPoliticoRepository.findAll());
@@ -113,7 +113,7 @@ public class AdminController {
 
 	
 	@PostMapping("candidatura/c")
-	public String cCandidaturaPost(
+	public String candidaturaCPost(
 			@RequestParam("idEleccion") Long idEleccion,
 			@RequestParam("idProvincia") Long idProvincia,
 			@RequestParam("idPartidoPolitico") Long idPartidoPolitico
@@ -128,10 +128,10 @@ public class AdminController {
 	}
 	
 	@GetMapping("candidatura/r")
-	public String rCandidaturaGet(
+	public String candidaturaRGet(
 			ModelMap m
 			) {
-		m.put("candidaturas", candidaturaRepository.findAll());
+		m.put("elecciones", eleccionRepository.findAll());
 		m.put("view", "admin/candidatura/r");
 		return "/_t/frame";
 	}

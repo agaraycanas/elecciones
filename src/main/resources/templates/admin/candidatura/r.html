@@ -2,8 +2,16 @@
 	<button><a href="/admin/candidatura/c">Crear</a></button>
 	
 	<h1>Lista de candidaturas</h1>
+
+	<select>
+		<option th:each="e:${elecciones}" th:text="${e.fecha}" th:value="${e.id}" name="idEleccion"/>
+	</select>	
 	
-	<ul>
-		<li th:each="e : ${elecciones}" th:text="${e.fecha}"/>
-	</ul>
+	<img onload="f()"/>
+	
+	<script type="text/javascript">
+	function f() {
+		alert("OK");
+	}
+	</script>
 </div>

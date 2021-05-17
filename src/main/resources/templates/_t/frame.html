@@ -4,12 +4,16 @@
 
 <div th:replace="/_t/head"></div>
 
-<div th:replace="/_t/header"></div>
+<body th:onload="|${onload}!=null?${onload}:">
 
-<div th:replace="/_t/nav"></div>
+	<div th:replace="/_t/header"></div>
+	
+	<div th:replace="/_t/nav"></div>
+	
+	<div th:replace="${view}"></div>
+	
+	<div th:replace="/_t/footer"></div>
 
-<div th:replace="${view}"></div>
-
-<div th:replace="/_t/footer"></div>
+</body>
 
 </html>
