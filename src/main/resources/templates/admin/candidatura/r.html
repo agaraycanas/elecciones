@@ -1,20 +1,33 @@
-<div class="container">
-	<button>
-		<a href="/admin/candidatura/c">Crear</a>
-	</button>
-
-	<h1>Lista de candidaturas</h1>
-
-	<select onchange="getCandidaturas()" id="idEleccion">
-		<option th:each="e:${elecciones}" th:text="${e.fecha}" th:value="${e.id}" name="idEleccion" />
-	</select> 
-	
 	<script>
 	
 		var xmlhttp;
 		
-		function accionAJAX() {
-			alert(xmlhttp.responseText);
+		function rellenarDatosCandidaturas() {
+			var tabla = `	
+				<table>
+					<tr>
+						<th>Provincia (CCAA) </th>
+						<th>Partido Político </th>
+					</tr>
+					`;
+			var candidaturas = JSON.parse(xmlhttp.responseText); 
+			for ( id in  candidaturas ) {
+				tabla += '<tr>';
+
+				tabla += '<td>';
+				tabla += candidaturas[id].provincia.nombre;
+				tabla += '</td>';
+
+				tabla += '<td>';
+				tabla += candidaturas[id].partidoPolitico.siglas;
+				tabla += '</td>';
+
+				tabla += '</tr>';
+			}
+			
+			tabla += '</table>';
+			
+			document.getElementById("idCandidaturas").innerHTML = tabla;
 		}
 		
 		function getCandidaturas() {
@@ -24,10 +37,25 @@
 			xmlhttp.send();
 			xmlhttp.onreadystatechange=function() {
 				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-					accionAJAX();			
+					rellenarDatosCandidaturas();			
 				}
 			}
 		}
 	</script>
+
+
+<div class="container">
+	<button>
+		<a href="/admin/candidatura/c">Crear</a>
+	</button>
+
+	<h1>Lista de candidaturas</h1>
+	
+	<select onchange="getCandidaturas()" id="idEleccion">
+		<option th:each="e:${elecciones}" th:text="${e.fecha}" th:value="${e.id}" name="idEleccion" />
+	</select> 
+
+	<div id="idCandidaturas">
+	</div>
 
 </div>
