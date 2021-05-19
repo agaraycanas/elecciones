@@ -1,17 +1,33 @@
 <div class="container">
-	<button><a href="/admin/candidatura/c">Crear</a></button>
-	
+	<button>
+		<a href="/admin/candidatura/c">Crear</a>
+	</button>
+
 	<h1>Lista de candidaturas</h1>
 
-	<select>
-		<option th:each="e:${elecciones}" th:text="${e.fecha}" th:value="${e.id}" name="idEleccion"/>
-	</select>	
+	<select onchange="getCandidaturas()" id="idEleccion">
+		<option th:each="e:${elecciones}" th:text="${e.fecha}" th:value="${e.id}" name="idEleccion" />
+	</select> 
 	
-	<img onload="f()"/>
+	<script>
 	
-	<script type="text/javascript">
-	function f() {
-		alert("OK");
-	}
+		var xmlhttp;
+		
+		function accionAJAX() {
+			alert(xmlhttp.responseText);
+		}
+		
+		function getCandidaturas() {
+		
+			xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("GET","/rest/admin/candidaturas/" + document.getElementById('idEleccion').value , true);
+			xmlhttp.send();
+			xmlhttp.onreadystatechange=function() {
+				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					accionAJAX();			
+				}
+			}
+		}
 	</script>
+
 </div>

@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ComunidadAutonoma {
 
@@ -23,6 +25,7 @@ public class ComunidadAutonoma {
 	private String nombre;
 
 	@OneToMany(mappedBy = "comunidadAutonoma")
+	@JsonIgnore
 	private Collection<Provincia> provincias;
 	
 	// =================================================

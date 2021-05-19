@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Provincia {
 
@@ -27,6 +29,7 @@ public class Provincia {
 	private int numEscanyos;
 	
 	@OneToMany(mappedBy = "provincia")
+	@JsonIgnore
 	private Collection<Candidatura> candidaturas;
 	
 	@ManyToOne(cascade = CascadeType.ALL)

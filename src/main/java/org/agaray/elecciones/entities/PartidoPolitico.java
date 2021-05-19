@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class PartidoPolitico {
 
@@ -26,6 +28,7 @@ public class PartidoPolitico {
 	private String nombre;
 
 	@OneToMany(mappedBy = "partidoPolitico")
+	@JsonIgnore
 	private Collection<Candidatura> candidaturas;
 
 	// ==================================================
