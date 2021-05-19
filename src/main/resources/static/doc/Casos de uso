@@ -5,9 +5,12 @@ ANONYMOUS
  *- init (protegido) (Borra todo. Crea usuario admin, ccaa's y provincias)
  
 USER
-	
+ - 	La primera vez que entre, que fuerce a escoger las elecciones y provincia con las 
+ 	que queremos trabajar y lo memorice en una variable de sesión.
+ - R Candidaturas (en la tabla dibujar un botón para actualizar los votos)
+ - U votos de candidatura (sumándole los votos a partir de un input-number)
 ADMIN
  *- CR Eleccion (investigar formatos de fecha)
  *- CR PartidoPolitico
-  - CR Candidatura
+ *- CR Candidatura
  

@@ -45,16 +45,17 @@
 
 
 <div class="container">
-	<button>
-		<a href="/admin/candidatura/c">Crear</a>
-	</button>
 
-	<h1>Lista de candidaturas</h1>
-	
-	<select onchange="getCandidaturas()" id="idEleccion">
-		<option th:each="e:${elecciones}" th:text="${e.fecha}" th:value="${e.id}" name="idEleccion" />
-	</select> 
+	<form action="/admin/candidatura/c">
+		<input type="submit" value="Crear"/>
+		
+		<h1>Lista de candidaturas</h1>
+		
+		<select onchange="getCandidaturas()" id="idEleccion" name="idEleccion">
+			<option th:each="e:${elecciones}" th:text="|${e.fecha.getMonth()} ${e.fecha.getYear()}|" th:value="${e.id}" name="idEleccion" />
+		</select> 
 
+	</form>
 	<div id="idCandidaturas">
 	</div>
 

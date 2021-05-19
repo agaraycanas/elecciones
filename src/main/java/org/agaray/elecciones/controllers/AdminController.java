@@ -102,8 +102,9 @@ public class AdminController {
 	// ======================================
 	@GetMapping("candidatura/c")
 	public String candidaturaCGet(
+			@RequestParam("idEleccion") Long idEleccion,
 			ModelMap m) {
-		m.put("elecciones",eleccionRepository.findAll());
+		m.put("idEleccion",idEleccion);
 		m.put("pps",partidoPoliticoRepository.findAll());
 		m.put("provincias",provinciaRepository.findAll());
 		
