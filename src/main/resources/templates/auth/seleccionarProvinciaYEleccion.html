@@ -1,0 +1,22 @@
+<div class="container">
+	<h1>Selecciona la provincia y las elecciones en las que trabajarás</h1>
+	
+	
+	<form action="/auth/escogerProvinciaYCCAA" method="post">
+		ELECCIONES
+		<select name="idEleccion">
+			<option th:each="e:${elecciones}" th:text="${e.fecha}" th:value="${e.id}"/>
+		</select>
+		<br/>
+		
+		
+		PROVINCIA
+		<select name="idProvincia">
+			<option th:each="p:${provincias}" th:text="|${p.nombre} (${p.comunidadAutonoma.nombre})|" th:value="${p.id}"/>
+		</select>
+		<br/>
+		
+		<input type="submit"/>
+		<br/>
+	</form>
+</div>

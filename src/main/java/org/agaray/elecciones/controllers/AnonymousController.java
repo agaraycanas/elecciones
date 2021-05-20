@@ -137,7 +137,13 @@ public class AnonymousController {
 			) {
 		User user = s.getAttribute("user")!=null ? (User)s.getAttribute("user") : null;
 		String rol =  (user!=null ? (user.isAdmin() ? "admin" : "auth" ) : "anon" );
-		m.put("view", "/"+rol+"/home");
+		String vistaADesplegar = "/"+rol+"/home";
+		if (rol.equals("auth") && (s.getAttribute("provincia") == null || s.getAttribute("eleccion") == null ) )  {
+			m.put("elecciones", eleccionRepository.findAll());
+			m.put("provincias", provinciaRepository.findAll());
+			vistaADesplegar = "/auth/seleccionarProvinciaYEleccion";
+		}
+		m.put("view", vistaADesplegar);
 		return "/_t/frame";
 	}
 
