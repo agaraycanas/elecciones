@@ -41,6 +41,10 @@ public class Eleccion {
 
 	// =================================================
 
+	@Override
+	public String toString() {
+		return this.fecha.toString();
+	}
 	public Long getId() {
 		return id;
 	}
@@ -50,7 +54,7 @@ public class Eleccion {
 	}
 
 	public LocalDate getFecha() {
-		return fecha;
+		return this.fecha;
 	}
 
 	public void setFecha(LocalDate fecha) {

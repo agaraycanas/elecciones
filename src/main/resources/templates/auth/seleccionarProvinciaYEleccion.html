@@ -2,7 +2,7 @@
 	<h1>Selecciona la provincia y las elecciones en las que trabajarás</h1>
 	
 	
-	<form action="/auth/escogerProvinciaYCCAA" method="post">
+	<form action="/auth/seleccionarProvinciaYEleccion" method="post">
 		ELECCIONES
 		<select name="idEleccion">
 			<option th:each="e:${elecciones}" th:text="${e.fecha}" th:value="${e.id}"/>

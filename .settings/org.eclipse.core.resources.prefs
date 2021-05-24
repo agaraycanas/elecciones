@@ -12,6 +12,7 @@ encoding//src/main/resources/templates/anon/home.html=UTF-8
 encoding//src/main/resources/templates/anon/init.html=UTF-8
 encoding//src/main/resources/templates/anon/login.html=UTF-8
 encoding//src/main/resources/templates/anon/registro.html=UTF-8
+encoding//src/main/resources/templates/auth/candidatura/r.html=UTF-8
 encoding//src/main/resources/templates/auth/home.html=UTF-8
 encoding//src/main/resources/templates/auth/seleccionarProvinciaYEleccion.html=UTF-8
 encoding//src/test/java=UTF-8

@@ -206,7 +206,6 @@ public class AnonymousController {
 	@GetMapping("/logout")
 	public String logout(HttpSession s) throws DangerException {
 		H.isRolOK("auth", s);
-
 		s.invalidate();
 		return "redirect:/";
 	}

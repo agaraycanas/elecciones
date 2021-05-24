@@ -1,0 +1,25 @@
+<div class="container">
+<h1>Listado de candidaturas para las elecciones 
+<th:block th:text="${eleccion.fecha}"/>
+en 
+<th:block th:text="${provincia.nombre}"/>
+</h1>
+
+<table class="table table-striped"> 
+
+	<tr>
+		<th>
+			Partido político
+		</th>
+		
+		<th>
+			Num. votos
+		</th>
+	</tr>
+	
+	<tr th:each="c:${candidaturas}">
+		<td th:text="${c.partidoPolitico.nombre}"/>
+		<td th:text="${c.numVotos}"/>
+	</tr>
+</table>
+</div>

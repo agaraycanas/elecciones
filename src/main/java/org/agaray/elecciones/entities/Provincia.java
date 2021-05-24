@@ -49,6 +49,11 @@ public class Provincia {
 
 	// =================================================
 
+	@Override
+	public String toString() {
+		return this.nombre;
+	}
+
 	public Long getId() {
 		return id;
 	}
