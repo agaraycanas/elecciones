@@ -1,6 +1,26 @@
+<script>
+	var xmlHttpRequest;
+	
+	function actualizarVotos(idCandidatura) {
+		document.getElementById("id-c-"+idCandidatura).innerHTML = xmlHttpRequest.responseText;
+	}
+	
+	function actualizarCandidatura(idCandidatura) {
+		xmlHttpRequest = new XMLHttpRequest();
+		nVotos = document.getElementById("id-nv-"+idCandidatura).value;
+		xmlHttpRequest.open("PATCH","/rest/auth/candidatura/"+idCandidatura+"/"+nVotos,true);
+		xmlHttpRequest.send();
+		xmlHttpRequest.onreadystatechange=function() {
+			if (xmlHttpRequest.readyState==4 && xmlHttpRequest.status==200) {
+				actualizarVotos(idCandidatura);
+			}
+		}
+	}
+</script>
+
 <div class="container">
 <h1>Listado de candidaturas para las elecciones 
-<th:block th:text="${eleccion.fecha}"/>
+<th:block th:text="|${eleccion.fecha.getMonth()} ${eleccion.fecha.getYear()}|"/>
 en 
 <th:block th:text="${provincia.nombre}"/>
 </h1>
@@ -15,11 +35,20 @@ en
 		<th>
 			Num. votos
 		</th>
+		<th>
+			Añadir votos
+		</th>
 	</tr>
 	
 	<tr th:each="c:${candidaturas}">
 		<td th:text="${c.partidoPolitico.nombre}"/>
-		<td th:text="${c.numVotos}"/>
+		<td th:id="|id-c-${c.id}|" th:text="${c.numVotos}"/>
+		<td>
+			<button th:onclick="|actualizarCandidatura(${c.id})|">
+				<img src="/img/icons/suma.png" width="20" height="15"/>
+			</button>
+			<input type="number" value="1" th:id="|id-nv-${c.id}|"/>
+		</td>
 	</tr>
 </table>
 </div>
