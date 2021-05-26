@@ -54,7 +54,7 @@ public class AuthController {
 			HttpSession s) {
 		Eleccion e = (Eleccion)(s.getAttribute("eleccion"));
 		Provincia p = (Provincia)(s.getAttribute("provincia"));
-		List<Candidatura> candidaturas = candidaturaRepository.findAllByProvinciaAndByEleccion(p, e); 
+		List<Candidatura> candidaturas = candidaturaRepository.findAllByProvinciaIdAndEleccionId(p.getId(), e.getId()); 
 		
 		m.put("eleccion", e);
 		m.put("provincia", p);
