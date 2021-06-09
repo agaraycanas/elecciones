@@ -134,6 +134,7 @@ public class AdminController {
 			) {
 		m.put("elecciones", eleccionRepository.findAll());
 		m.put("view", "admin/candidatura/r");
+		m.put("onload", "getCandidaturas()");
 		return "/_t/frame";
 	}
 

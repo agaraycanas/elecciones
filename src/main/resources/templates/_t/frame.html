@@ -4,7 +4,8 @@
 
 <div th:replace="/_t/head"></div>
 
-<body th:onload="|${onload}!=null?${onload}:">
+<body th:data-f="${onload}"  th:onload="passValue(this.getAttribute('data-f'))">
+
 
 	<div th:replace="/_t/header"></div>
 	
